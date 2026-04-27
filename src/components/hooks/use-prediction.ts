@@ -55,8 +55,8 @@ export function useAsyncPrediction() {
 
       const data = await res.json();
       setJobId(data.job_id);
-    } catch (err: any) {
-      setError(err.message || String(err));
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
       setIsLoading(false);
     }
   }, [reset]);
@@ -85,8 +85,8 @@ export function useAsyncPrediction() {
           // Still processing, increment poll count
           setPollCount(count => count + 1);
         }
-      } catch (err: any) {
-        setError(err.message || String(err));
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : String(err));
         setIsLoading(false);
       }
     };

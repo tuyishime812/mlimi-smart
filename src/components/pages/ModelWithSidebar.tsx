@@ -55,8 +55,8 @@ export default function ModelWithSidebar() {
         setPredictions(data.predictions || []);
         setAdvice(data.advice || null);
       }
-    } catch (err: any) {
-      setError(err.message || String(err));
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : String(err));
     } finally {
       setLoading(false);
     }
@@ -76,8 +76,7 @@ export default function ModelWithSidebar() {
               <div className="flex flex-col gap-4 items-center justify-center border-2 border-dashed border-gray-200 rounded-lg p-6">
                 <div className="w-48 h-48 bg-gray-50 rounded-lg flex items-center justify-center overflow-hidden">
                   {preview ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={preview} alt="preview" className="w-full h-full object-cover" />
+                                        <img src={preview} alt="preview" className="w-full h-full object-cover" />
                   ) : (
                     <div className="text-sm text-gray-400">Preview</div>
                   )}

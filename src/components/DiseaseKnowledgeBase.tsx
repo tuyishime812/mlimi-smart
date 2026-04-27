@@ -82,7 +82,7 @@ const DISEASES_AND_PESTS = [
 
 interface DiseaseKBProps {
   // optional callback to insert KB info into chat
-  onSelectItem?: (category: string, item: any) => void;
+  onSelectItem?: (category: string, item: Record<string, unknown>) => void;
 }
 
 export const DiseaseKnowledgeBase = ({ onSelectItem }: DiseaseKBProps) => {

@@ -12,20 +12,15 @@ export default function PWAInstallPrompt() {
   const [isInstalled, setIsInstalled] = useState(false);
 
   useEffect(() => {
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    const alreadyInstalled = (window.matchMedia("(display-mode: standalone)").matches) || 
+    const alreadyInstalled = (window.matchMedia("(display-mode: standalone)").matches) ||
                             (document.referrer.includes("android-app://")) ||
                             ("standalone" in navigator && (navigator as { standalone?: boolean }).standalone === true);
 
-    if (!alreadyInstalled && isMobile) {
-      const timer = setTimeout(() => {
-        const dismissed = localStorage.getItem("pwa-install-dismissed");
-        if (!dismissed) {
-          setShowPrompt(true);
-        }
-      }, 10000);
-
-      return () => clearTimeout(timer);
+    if (!alreadyInstalled) {
+      const dismissed = localStorage.getItem("pwa-install-dismissed");
+      if (!dismissed) {
+        setShowPrompt(true);
+      }
     }
   }, []);
 

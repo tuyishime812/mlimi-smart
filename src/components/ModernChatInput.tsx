@@ -12,7 +12,7 @@ interface ModernChatInputProps {
 export const ModernChatInput = ({ onSend, disabled }: ModernChatInputProps) => {
   const [input, setInput] = useState("");
   const [isRecording, setIsRecording] = useState(false);
-  const recognitionRef = useRef<any>(null);
+  const recognitionRef = useRef<SpeechRecognition | null>(null);
 
   const handleSend = () => {
     if (input.trim() && !disabled) {
@@ -35,14 +35,14 @@ export const ModernChatInput = ({ onSend, disabled }: ModernChatInputProps) => {
       return;
     }
 
-    const SpeechRecognition = (window as any).webkitSpeechRecognition || (window as any).SpeechRecognition;
+    const SpeechRecognition = (window as { webkitSpeechRecognition?: typeof SpeechRecognition; SpeechRecognition?: typeof SpeechRecognition }).webkitSpeechRecognition || (window as { SpeechRecognition?: typeof SpeechRecognition }).SpeechRecognition;
     if (!recognitionRef.current) {
       recognitionRef.current = new SpeechRecognition();
       recognitionRef.current.continuous = false;
       recognitionRef.current.interimResults = true;
       recognitionRef.current.onstart = () => setIsRecording(true);
       recognitionRef.current.onend = () => setIsRecording(false);
-      recognitionRef.current.onresult = (event: any) => {
+      recognitionRef.current.onresult = (event: SpeechRecognitionEvent) => {
         let transcript = "";
         for (let i = event.resultIndex; i < event.results.length; i++) {
           transcript += event.results[i][0].transcript;
@@ -51,7 +51,7 @@ export const ModernChatInput = ({ onSend, disabled }: ModernChatInputProps) => {
           setInput(transcript.trim());
         }
       };
-      recognitionRef.current.onerror = (event: any) => {
+      recognitionRef.current.onerror = (event: SpeechRecognitionErrorEvent) => {
         console.error("Speech recognition error", event.error);
         toast.error(`Voice error: ${event.error}`);
       };

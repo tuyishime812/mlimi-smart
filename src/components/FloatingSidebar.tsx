@@ -25,7 +25,7 @@ interface FloatingSidebarProps {
 
 export const FloatingSidebar = ({ queryType, onQueryTypeChange, isOpen, onClose, children }: FloatingSidebarProps) => {
   const [loading, setLoading] = useState(false);
-  const [weatherData, setWeatherData] = useState<any>(null);
+  const [weatherData, setWeatherData] = useState<Record<string, unknown> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");

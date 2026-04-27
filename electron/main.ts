@@ -3,7 +3,9 @@ import { join } from 'path';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 try {
-  if (require('electron-squirrel-startup')) {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const squirrelStartup = require('electron-squirrel-startup');
+  if (squirrelStartup) {
     app.quit();
   }
 } catch (e) {

@@ -34,7 +34,7 @@ const Index = () => {
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          const hydrated: Message[] = parsed.map((m: any) => ({
+          const hydrated: Message[] = parsed.map((m: { role: string; content: string; timestamp: string }) => ({
             role: m.role,
             content: m.content,
             timestamp: m.timestamp ? new Date(m.timestamp) : new Date(),
@@ -65,7 +65,7 @@ const Index = () => {
       timestamp: new Date(),
     };
     setMessages([welcome]);
-    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
   };
 
   const handleSendMessage = useCallback(async (userInput: string) => {
@@ -130,7 +130,7 @@ const Index = () => {
         if (/^\s/.test(chunk)) return prev + chunk; // chunk already starts with space
         if (/\s$/.test(prev)) return prev + chunk; // prev already ends with space
         // Don't add space before common punctuation or dashes
-        if (/^[\.,:;!\?\)\]\}%—–-]/.test(chunk)) return prev + chunk;
+        if (/^[.,:;!?)\]%—–-]/.test(chunk)) return prev + chunk;
         return prev + ' ' + chunk;
       };
 
@@ -373,7 +373,7 @@ const Index = () => {
                     key={mode}
                     variant={queryType === mode ? "default" : "outline"}
                     className="w-full justify-start text-sm"
-                    onClick={() => setQueryType(mode as any)}
+                    onClick={() => setQueryType(mode as QueryType)}
                   >
                     {mode}
                   </Button>
