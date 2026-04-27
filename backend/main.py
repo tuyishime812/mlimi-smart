@@ -52,7 +52,7 @@ async def chat(request: ChatRequest):
             }
         else:
             demo = {
-                "General": "Moni! I'm your farming assistant. call for real responses.",
+                "General": "Moni! I'm your farming assistant. Add OpenAI API key for real responses.",
                 "Farming Advice": "For healthy crops, ensure proper spacing and regular watering.",
                 "Pest & Disease Control": "Use neem leaves or soap spray as natural pesticides.",
                 "Business & Marketing": "Consider forming cooperatives for better prices."

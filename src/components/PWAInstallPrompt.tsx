@@ -52,6 +52,7 @@ export default function PWAInstallPrompt() {
       const { outcome } = await deferredPrompt.userChoice;
       if (outcome === "accepted") {
         setShowPrompt(false);
+        localStorage.setItem("pwa-installed", "true");
       }
       setDeferredPrompt(null);
     } else if (isIOS) {
