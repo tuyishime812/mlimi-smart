@@ -1,3 +1,57 @@
-
-__pycache__/
+# Dependencies
 node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+dist/
+dist-electron/
+build/
+release/
+
+# Large binary files
+*.asar
+*.exe
+*.dmg
+*.zip
+*.app
+
+# Environment files
+.env
+.env.local
+.env.*.local
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Android/Capacitor (if exists)
+android/
+ios/
+
+# Electron
+.electron/
