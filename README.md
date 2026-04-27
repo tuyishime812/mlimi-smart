@@ -1,77 +1,58 @@
-<<<<<<< HEAD
-# React + TypeScript + Vite
+# MLIMI Smart - AI Farming Assistant
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Smart, sustainable farming assistant for Malawi and beyond. Get expert advice on crops, pest control, weather and markets in multiple languages.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🤖 **AI Chat Assistant** - Get farming advice in local languages
+- 🔬 **Disease Detection** - Upload plant photos for instant disease diagnosis
+- 🌤️ **Weather Integration** - Real-time weather data for your location
+- 📱 **PWA Support** - Install as a mobile app, works offline
+- 💻 **Desktop App** - Electron builds for Windows, Mac, and Linux
 
-## React Compiler
+## Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Node.js 18+ and npm
+- Python 3.8+ (for backend API)
+- Backend server running on `localhost:8000`
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```bash
+# Install dependencies
+npm install
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Start development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Backend Setup
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The frontend expects a backend API running on `http://localhost:8000` with these endpoints:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- `POST /chat` - AI chat responses
+- `POST /predict` - Disease detection from images
+- `POST /predict/async` - Async disease prediction
+- `GET /predict/status/:jobId` - Check prediction status
+- `GET /weather` - Weather data
+
+## Building for Production
+
+```bash
+# Build for web
+npm run build
+
+# Build Electron desktop app
+npm run electron:build
+
+# Windows specific
+npm run electron:build:win
 ```
-=======
-# mlimi-smart
->>>>>>> 77c111b2543d32c579e17b4b6e83d2faf4949846
+
+## PWA Installation
+
+The app includes a PWA install prompt. On supported browsers (Chrome, Edge), click "Install" when prompted. On iOS Safari, use Share → "Add to Home Screen".
+
+## License
+
+MIT
